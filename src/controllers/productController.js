@@ -12,6 +12,11 @@ const getAllProducts = async (req, res) => {
         res.status(500).json({ status: 'Error', message: 'Error al obtener productos' });
     }
 };
+/**
+ * Obtiene la URL de los productos
+ * @param {array} productList - Lista de productos
+ * @returns {array} Lista de productos con las URLs de las imágenes
+ */
 async function getUrlProduct(productList) {
     try {
         const productsWithUrls = [];
@@ -60,4 +65,4 @@ const createProduct = async (req, res) => {
 const deleteProduct=(req,res)=>{};
 const updateProduct=(req,res)=>{};
 
-module.exports={getAllProducts,getAllByName,createProduct,deleteProduct,updateProduct};
+module.exports={getAllProducts,getAllByName,createProduct,deleteProduct,updateProduct,getUrlProduct};

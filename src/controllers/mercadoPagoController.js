@@ -8,7 +8,6 @@ const client = new MercadoPagoConfig({
 
 const createPreferences =async (req, res) => {
     try {
-      console.log("hola");
       try {
         const body = {
           items: [

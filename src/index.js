@@ -6,6 +6,7 @@ const v1UserRoutes=require('./v1/routes/userRoutes');
 const v1DirectionRoutes=require('./v1/routes/directionRoutes');
 const v1AmazonRoutes=require('./v1/routes/amazonRoutes');
 const v1MercadoRoutes=require('./v1/routes/mercadoPagoRoutes');
+const v1CartRoutes=require('./v1/routes/cartRoutes');
 
 const connectDB =require('./database/db');
 const cors = require('cors');
@@ -37,6 +38,7 @@ app.use('/v1/userRoutes', v1UserRoutes);
 app.use('/v1/directionRoutes', v1DirectionRoutes);
 app.use('/v1/amazonRoutes', v1AmazonRoutes);
 app.use('/v1/mercadoPagoRoutes', v1MercadoRoutes);
+app.use('/v1/cartRoutes', v1CartRoutes);
 
 app.get('/', (req, res) => {
     const htmlResponse = "<h1>Welcome to API from 'proyecto integrador'</h1>";
