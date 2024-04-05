@@ -1,5 +1,10 @@
 const express = require('express');
 
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
+const connectDB = require('./database/db');
+const config = require('./config-cors');
+
 //rutes of the application
 const v1ProductRoutes=require('./v1/routes/productRoutes');
 const v1UserRoutes=require('./v1/routes/userRoutes');
@@ -8,22 +13,28 @@ const v1AmazonRoutes=require('./v1/routes/amazonRoutes');
 const v1MercadoRoutes=require('./v1/routes/mercadoPagoRoutes');
 const v1CartRoutes=require('./v1/routes/cartRoutes');
 
-const connectDB =require('./database/db');
-const cors = require('cors');
-const config = require('./config-cors');
-
-const fileUpload = require('express-fileupload');
-
 
 const app = express();
 const PORT =process.env.PORT || 3000;
+
+// Configuración de CORS personalizada
+const corsOptionsDelegate = function (req, callback) {
+    let corsOptions = { origin: false }; // Bloquear por defecto
+    const requestOrigin = req.header('Origin');
+    
+    // Verifica si el origen de la solicitud está permitido
+    config.application.cors.server.forEach(setting => {
+      if (setting.origin.includes(requestOrigin)) {
+        corsOptions = { origin: true, credentials: setting.credentials };
+      }
+    });
+  
+    callback(null, corsOptions); // Usa las opciones de CORS determinadas
+  };
+// Aplicando middleware CORS con la delegación de opciones
+app.use(cors(corsOptionsDelegate));
+
 app.use(express.json());
-
-
-connectDB();
-
-
-app.use(cors(config.application.cors.server))
 
 app.use(
     fileUpload({
@@ -31,6 +42,10 @@ app.use(
       tempFileDir: "./uploads",
     })
 );
+
+
+connectDB();
+
 
 
 app.use('/v1/productRoutes', v1ProductRoutes);
