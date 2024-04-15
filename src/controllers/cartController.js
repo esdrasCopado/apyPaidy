@@ -39,6 +39,8 @@ const getProductsCart = async (req, res) => {
     return res.status(500).json({ status: 500, message: 'Internal server error' });
   }
 };
+
+
 const addQuantityProduct = async (req, res) => {
   try {
     const idClient = req.params.idClient;
@@ -94,4 +96,4 @@ function shippiCost(totalCost){
 
 
 
-module.exports = { setProductCart, getProductsCart , addQuantityProduct , subtractQuantityProduct, deleteProduct};
+module.exports = { setProductCart, getProductsCart , addQuantityProduct , subtractQuantityProduct, deleteProduct };

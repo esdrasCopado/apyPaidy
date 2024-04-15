@@ -16,23 +16,8 @@ const v1CartRoutes=require('./v1/routes/cartRoutes');
 
 const app = express();
 const PORT =process.env.PORT || 3000;
+app.use(cors());
 
-// Configuración de CORS personalizada
-const corsOptionsDelegate = function (req, callback) {
-    let corsOptions = { origin: false }; // Bloquear por defecto
-    const requestOrigin = req.header('Origin');
-    
-    // Verifica si el origen de la solicitud está permitido
-    config.application.cors.server.forEach(setting => {
-      if (setting.origin.includes(requestOrigin)) {
-        corsOptions = { origin: true, credentials: setting.credentials };
-      }
-    });
-  
-    callback(null, corsOptions); // Usa las opciones de CORS determinadas
-  };
-// Aplicando middleware CORS con la delegación de opciones
-app.use(cors(corsOptionsDelegate));
 
 app.use(express.json());
 

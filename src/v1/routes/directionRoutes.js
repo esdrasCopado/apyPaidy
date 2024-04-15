@@ -5,7 +5,7 @@ const directionsController = require('../../controllers/directionsController');
 
 router
   .get("/",directionsController.getAllDirections)
-  .get("/:directionID",directionsController.getOneDirection)
+  .get("/:directionID",directionsController.getUserDirection)
   .post("/",directionsController.createDirection)
   .patch("/:directionID", directionsController.updateDirection)
   .delete("/:directionID", directionsController.deleteDirection);

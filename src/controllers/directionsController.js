@@ -4,7 +4,7 @@ const getAllDirections=(req,res)=>{
     const getAllDirections=directionService.getAllDirections();
     res.send('hello world');
 };
-const getOneDirection = async (req, res) => {
+const getUserDirection = async (req, res) => {
     try {
         const directionId = req.params.directionID;
         const direction = await directionService.getOneDirection(directionId);
@@ -22,14 +22,15 @@ const getOneDirection = async (req, res) => {
 
 const createDirection = async (req, res) => {
     try {
-        const { user, StreetNumber, StreetName, State, ZIPCode, Country, Neighborhood, DeliveryInstructions } = req.body;
+        const { userID,city, StreetNumber, StreetName, State, ZIPCode, Country, Neighborhood, DeliveryInstructions } = req.body;
         // Validación de campos
-        if (!user || !StreetNumber || !StreetName || !State || !ZIPCode || !Country || !Neighborhood || !DeliveryInstructions) {
+        if (!userID ||!city|| !StreetNumber || !StreetName || !State || !ZIPCode || !Country || !Neighborhood || !DeliveryInstructions) {
             return res.status(400).json({ status: 'Error', message: 'Faltan campos requeridos' });
         }
 
         const newDirection = {
-            user,
+            userID,
+            city,
             StreetNumber,
             StreetName,
             State,
@@ -38,10 +39,15 @@ const createDirection = async (req, res) => {
             Neighborhood,
             DeliveryInstructions
         };
+        console.log(newDirection);
 
         const createdDirection = await directionService.createDirection(newDirection);
-
-        res.status(201).json({ status: 'OK', data: createdDirection });
+        if(createdDirection) {
+            res.status(201).json({ status: 'OK', data: createdDirection });
+        }else{
+            res.status(500).json({ status: 'Error', message: 'Error al crear dirección' });
+        }
+        
     } catch (error) {
         res.status(500).json({ status: 'Error', message: 'Error al crear dirección' });
     }
@@ -54,4 +60,4 @@ const updateDirection=(req,res)=>{
     res.send(`Update direction ${req.params.directionID}`);
 };
 
-module.exports = {getAllDirections, getOneDirection, createDirection, deleteDirection, updateDirection};
+module.exports = {getAllDirections, getUserDirection, createDirection, deleteDirection, updateDirection};

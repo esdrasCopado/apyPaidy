@@ -78,6 +78,8 @@ const AddProductQuantity = async (idClient, nameProduct) => {
     try {
         
         const cart = await cartModel.findOne({ user: idClient });
+        const allcart=await cartModel.find();
+        console.log("todos los productos"+allcart);
         if (!cart) {
             throw new Error("Cart not found");
         }

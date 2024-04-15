@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const directionSchema = new mongoose.Schema({
-    user: String,
+    city:String,
     StreetNumber: String,
     StreetName: String,
     State: String,
