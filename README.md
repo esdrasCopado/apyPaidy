@@ -29,7 +29,8 @@ http
 
 #### Get item
 
-```http
+```
+http
   GET /api/items/${id}
 ```
 
