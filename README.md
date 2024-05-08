@@ -9,14 +9,14 @@ API Paidy is part of the final project of "proyecto integrador" for the Software
 ## API Reference
 
 #### Routes of product
-
+`
 http
   GET /v1/routes/productRoutes
   GET /v1/routes/productRoutes/:productName
   POST /v1/routes/productRoutes
   PATCH /v1/routes/productRoutes/:productID
   DELETE /v1/routes/productRoutes/:productID
-
+`
 
 | Parameter  | Type     | Description                |
 | :--------  | :------- | :------------------------- |
